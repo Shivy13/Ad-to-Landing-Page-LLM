@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import Image from 'react-bootstrap/Image';
-import AdInput from './components/AdInput';
 import ResultsDisplay from './components/ResultsDisplay';
-import LoadingSpinner from './components/LoadingSpinner';
 
 function App() {
   const [url, setUrl] = useState('');

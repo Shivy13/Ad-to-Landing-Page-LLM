@@ -41,13 +41,13 @@ const AdInput = ({ adCopy, setAdCopy, adImages, setAdImages, previewUrls, setPre
               {previewUrls.map((url, index) => (
                 <div key={index} className="position-relative">
                   <img src={url} alt={`Ad preview ${index+1}`} className="img-thumbnail" style={{ maxWidth: '150px', height: 'auto' }} />
-                  <button 
+                  <Button 
                     type="button" 
                     className="btn btn-sm btn-danger position-absolute top-0 end-0" 
                     onClick={() => removeImage(index)}
                   >
                     ×
-                  </button>
+                  </Button>
                 </div>
               ))}
             </div>

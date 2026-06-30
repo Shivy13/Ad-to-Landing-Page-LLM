@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Badge, ListGroup, ListGroupItem, Image, ProgressBar } from 'react-bootstrap';
+import { Card, Col, Badge, ListGroup, ListGroupItem, ProgressBar } from 'react-bootstrap';
 
 const ResultsDisplay = ({ data }) => {
   const { analysis } = data;
