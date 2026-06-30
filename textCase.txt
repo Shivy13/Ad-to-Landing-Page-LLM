@@ -1,0 +1,108 @@
+Test Case 1:
+
+Good Match (High Score Expected)
+Use this to verify the tool correctly identifies alignment
+Ad Copy:
+Busy working moms: Get healthy dinners on the table in 15 minutes or less! Our weekly meal kit delivers pre-portioned ingredients and easy recipes. Special offer: 30% off your first box + free shipping. Join 12,000+ moms who've reclaimed their evenings.
+Landing Page URL: 
+https://httpbin.org/html  # We'll replace this with a real test page below
+Better Test Page (create this locally):
+Save this as test_meal_page.html and serve it locally:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quick & Healthy Meals for Busy Moms</title>
+</head>
+<body>
+    <h1>Designed for Busy Working Moms</h1>
+    <p>Get healthy meals on the table in 15 minutes or less - no meal planning required!</p>
+    <p>Our weekly meal kit subscription delivers pre-portioned ingredients and easy recipes right to your door.</p>
+    <p><strong>Special Offer:</strong> 30% off your first box + free shipping</p>
+    <p>Join 12,000+ busy moms who've reclaimed their evenings with our service.</p>
+    <a href="#signup" class="cta-button">Start Your Free Trial</a>
+</body>
+</html>
+Expected Result: High overall match score (75-90), strong scores across all dimensions, particularly persona and offer.
+
+Test Case 2: 
+
+Clear Mismatch (Low Score Expected)
+Use this to verify the tool detects misalignment
+Ad Copy:
+Luxury Swiss watches at 70% off! Free worldwide shipping. Certified authentic with 2-year warranty. Limited time offer - shop now!
+Landing Page URL:
+https://httpbin.org/html  # This contains Moby Dick text - completely unrelated
+Expected Result: Very low overall match score (10-25), near-zero scores in offer, product framing, proof, and above-the-fold continuity dimensions.
+
+Test Case 3: 
+
+Persona-Focused Test
+Use this to test persona dimension specifically
+Ad Copy:
+Attention college students: Ace your exams with our focus-enhancing study supplements! Formulated for all-nighters and intensive study sessions. 20% off first order with code STUDY20.
+Landing Page URL:
+Create test_supplement_page.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>General Health Supplements</title>
+</head>
+<body>
+    <h1>Premium Vitamin Supplements for Everyone</h1>
+    <p>Our daily multivitamin supports overall health and wellness for adults of all ages.</p>
+    <p>Contains essential vitamins A, C, D, E, and B-complex for immune support.</p>
+    <p><strong>Special Offer:</strong> 15% off your first purchase</p>
+    <a href="#shop">Shop Now</a>
+</body>
+</html>
+Expected Result: Low persona score (20-40) because ad targets college students with study-specific benefits, but landing page speaks to general adult audience with no academic focus.
+
+Test Case 4: 
+
+Offer Mismatch Test
+Use this to test offer dimension specifically
+Ad Copy:
+Flash Sale! Buy one, get one free on all running shoes. Today only - use code BOGOSHOES at checkout.
+Landing Page URL:
+Create test_shoe_page.html:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Premium Running Shoes Collection</title>
+</head>
+<body>
+    <h1>High-Performance Running Shoes</h1>
+    <p>Explore our latest collection of lightweight, supportive running shoes designed for comfort and durability.</p>
+    <p>Features include breathable mesh uppers, responsive cushioning, and durable outsoles.</p>
+    <p>Price range: $89 - $149</p>
+    <a href="#collection">View Collection</a>
+</body>
+</html>
+Expected Result: Low offer score (10-30) because ad promises BOGO deal but landing page shows regular pricing with no promotion mentioned.
+
+Test Case 5: 
+
+Multiple Ads for Clustering Test
+Use this to verify the clustering feature works
+Ad Copy 1: --ad-copy "Save 50% on winter coats! Limited time offer ends Sunday."
+Ad Copy 2: --ad-copy "Get 50% off all outerwear this weekend only. Jackets, parkas, and more."
+Ad Copy 3: --ad-copy "Learn professional photography in 4 weeks. Hands-on training with industry experts."
+Landing Page URL: 
+https://httpbin.org/html  # Moby Dick page (will show mismatch for all)
+Expected Result: 
+- Low scores for all ads (since landing page is unrelated)
+- Clustering should group Ad 1 and Ad 2 together as "winter outerwear/discount-focused"
+- Ad 3 should be in its own cluster ("education/skill-building")
+- Suggested page sections should differ between clusters
+
+Test Case 6: 
+
+Image-Based Ad Test (for Python CLI tool)
+Use this if you have ad screenshots to test OCR functionality
+1. Create a simple ad image with text (using Paint or any image editor):
+- Text: "Summer Fitness Challenge: Get 6-pack abs in 8 weeks! Free workout plan + nutrition guide. Sign up now!"
+- Save as summer_fitness_ad.png
+2. Test command:
+set OPENAI_API_KEY=your_openrouter_key_here
+python ad_landing_mismatch.py --url https://httpbin.org/html --ad-image summer_fitness_ad.png
+Expected Result: Should extract the text from the image and analyze it like a text ad.
