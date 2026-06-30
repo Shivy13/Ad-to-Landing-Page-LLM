@@ -6,6 +6,7 @@ backend/node_modules/
 backend/.env
 frontend/.env
 
+
 # Build output
 frontend/build/
 frontend/dist/

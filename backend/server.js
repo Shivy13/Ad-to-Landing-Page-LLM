@@ -30,7 +30,7 @@ const upload = multer({
 
 // Initialize OpenAI client
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || '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',
+  apiKey: process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY,
   baseURL: 'https://openrouter.ai/api/v1',
 });
 
