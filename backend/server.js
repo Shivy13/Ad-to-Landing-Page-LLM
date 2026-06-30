@@ -16,11 +16,24 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://ad-to-landing-page-llm-five.vercel.app"
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://ad-to-landing-page-llm-five.vercel.app/'
-  ]
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  methods: ["GET", "POST", "OPTIONS"],
+  credentials: false
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -193,6 +206,9 @@ Only output valid JSON.
     throw error;
   }
 }
+
+app.options("*", cors());
+
 
 // API Routes
 app.get('/health', (req, res) => {
