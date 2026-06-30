@@ -73,7 +73,7 @@ function App() {
         formData.append('adImages', image, image.name);
       });
       
-      const response = await axios.post('http://localhost:5000/api/analyze', formData, {
+      const response = await axios.post('https://ad-to-landing-page-llm.onrender.com/api/analyze', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
